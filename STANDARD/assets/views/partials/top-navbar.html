@@ -1,0 +1,60 @@
+<!-- start: TOP NAVBAR -->
+<!-- start: NAVBAR HEADER -->
+<div class="navbar-header">
+	<a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" ng-click="toggle('sidebar')" class="btn btn-navbar sidebar-toggle"> <i class="ti-align-justify"></i> 
+	</a>
+	<a class="navbar-brand" ui-sref="app.dashboard"> 
+		<img ng-src="{{app.layout.logo}}" alt="{{app.name}}" width="140px" height="50px"/> 
+	</a>
+	<a href="#" class="sidebar-toggler pull-right visible-md visible-lg" ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed"> <i class="ti-align-justify"></i> 
+	</a>
+	<ul class="nav navbar-right">
+
+		<li class="dropdown current-user hidden-sm hidden-md hidden-lg" uib-dropdown on-toggle="toggled(open)">
+
+			<a href class="dropdown-toggle" uib-dropdown-toggle> 
+				<img ng-if="!userLogged.member.photoId" src="assets/images/default-user.png" >
+				<img ng-if="userLogged.member.photoId" ng-src="{{getImage(userLogged.member.photoId, false)}}" alt="{{userLogged.name}}" >
+				<span class="username">{{userLogged.username}} <i class="ti-angle-down"></i></i></span> 
+				
+			</a>
+			<ul class="dropdown-menu dropdown-dark">
+				<li>
+					<a ui-sref="app.auth.user.modify({id:userLogged.id})"> My Profile </a>
+				</li>
+				<li>
+					<a ui-sref="login.signin" translate="topbar.user.LOGOUT"> Log Out </a>
+				</li>
+			</ul>
+		</li>
+
+	</ul>
+
+    
+</div>
+<!-- end: NAVBAR HEADER -->
+<!-- start: NAVBAR COLLAPSE -->
+<div class="navbar-collapse collapse visible-xs-block" uib-collapse="navbarCollapsed" ng-init="navbarCollapsed = true" off-click-filter="#menu-toggler">
+	<ul class="nav navbar-right" ct-fullheight="window" >
+
+		<li class="dropdown current-user" uib-dropdown on-toggle="toggled(open)">
+			<a href class="dropdown-toggle" uib-dropdown-toggle> <img ng-src="{{getImage(userLogged.member.photoId, false)}}" alt="{{userLogged.name}}"> <span class="username">{{userLogged.username}} <i class="ti-angle-down"></i></i></span> </a>
+			<ul class="dropdown-menu dropdown-dark">
+				<li>
+					<a ui-sref="app.auth.user.detail({id:userLogged.id})"> My Profile </a>
+				</li>
+				<li>
+					<a ui-sref="login.signin" translate="topbar.user.LOGOUT"> Log Out </a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="close-handle visible-xs-block menu-toggler" ng-click="navbarCollapsed = true">
+		<div class="arrow-left"></div>
+		<div class="arrow-right"></div>
+	</div>
+</div>
+<!-- <a class="sidebar-mobile-toggler dropdown-off-sidebar hidden-md hidden-lg" ng-click="toggle('off-sidebar')"> &nbsp; </a>
+<a class="dropdown-off-sidebar hidden-sm hidden-xs" ng-click="toggle('off-sidebar')"> &nbsp; </a> -->
+<!-- end: NAVBAR COLLAPSE -->
+<!-- start: TOP NAVBAR -->

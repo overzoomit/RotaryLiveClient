@@ -1,0 +1,40 @@
+<div ng-controller="UserMeCtrl">
+	
+	<div class="row">
+		<div class="col-sm-3 col-md-3 boxprocorrpadd_ipad" ng-repeat="user in users">
+			
+			<div class="thumbnail thumbnail_ipad thumbnailCorripad row">
+				
+			
+				<div ng-click="shareObj(user)" class="col-xs-4 backgroundlistimpipad">
+					<img ng-if="!user.member.photoId" class="img-responsive" src="assets/images/default-user.png" >
+					<img ng-if="user.member.photoId" class="img-responsive" ng-src="{{getImage(user.member.photoId, false)}}" >			
+				</div>
+				
+				<div class="col-xs-8">											
+					<h4 class="texttitlecart texttitlecartipad">{{user.member.firstName}} {{user.member.lastName}}</h4>	
+					
+					<p>
+						<span class="textindirizzocart">{{user.member.job.headline}}</span>
+						<br />
+						
+						<a ng-if="user.member.phone" href="tel:{{user.member.phone}}"><i class="btn fa fa-phone font-size-15" ></i></a>
+						<a ng-if="user.member.mobile" href="sms:{{user.member.mobile}}"><i class="btn fa fa-mobile-phone font-size-15"></i></a>
+						<a ng-if="user.member.email" href="mailto:{{user.member.email}}"><i class="btn fa fa-envelope-o font-size-15"></i></a>
+						<a ng-if="(user.id != userLogged.id)" ng-click="chat(user)"><i class="glyphicon glyphicon-send"></i></a>
+						
+					</p>
+
+					<div class="borderpcapipad" >
+						
+						
+						<span ng-if="user.club.name" class="textdispimpipad"><i class="fa fa-map-marker"></i> {{user.club.name}}</span>
+						
+					</div>
+				</div>
+
+					
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,253 @@
+<!-- start: USER PROFILE -->
+<div class="container-fluid container-fullw bg-white">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div>
+				<!-- start: USER TABSET -->
+					<!-- start: TAB OVERVIEW -->
+						<div class="row" ng-controller="UserEditCtrl">
+							<button ng-if="isAdmin(userLogged)" class="btn btn-info btn-o" ui-sref="app.auth.user.detail( {id: user.id} )">< Back</button>
+
+							<div class="col-md-12">
+								<form role="form" name="Form" id="form">
+							<fieldset>
+								<legend>
+									User Info
+								</legend>
+								<div class="row">
+									<div class="col-md-5">
+										<div class="form-group">
+											<label class="control-label">
+												Username
+											</label>
+											<input type="text" placeholder="Enter your username" class="form-control" name="username" ng-model="user.username">
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div ng-show="admin" class="form-group">
+											<label class="control-label">
+												Roles
+											</label>
+											<!-- <input type="text" placeholder="Choose the role" class="form-control" name="lastname" ng-model="user.roles[0].name"> -->
+
+											<select class="form-control" name="roles" ng-options="option.name for option in roles track by option.name" ng-model="user.roles[0]"></select>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<label class="control-label">
+												Verified
+											</label>
+										</br>
+											<span ng-if="user.verified"><i tooltip-placement="top" uib-tooltip="Click to Invalid" class="fa fa-check-circle checkdispoimp" ng-click="user.verified = false"></i></span>
+											<span ng-if="!user.verified"><i tooltip-placement="top" uib-tooltip="Click to Valid User" class="fa fa-circle-o checkdispoimp" ng-click="user.verified = true"></i></span>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>
+									Member Info
+								</legend>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">
+												First Name
+											</label>
+											<input type="text" placeholder="Enter your first name" class="form-control" name="firstname" ng-model="user.member.firstName">
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Last Name
+											</label>
+											<input type="text" placeholder="Enter your last name" class="form-control" name="lastname" ng-model="user.member.lastName">
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Email Address
+											</label>
+											<input type="email" placeholder="email address" class="form-control" name="email" ng-model="user.member.email">
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Phone
+											</label>
+											<input type="text" placeholder="phone number" class="form-control" name="phone" ng-model="user.member.phone">
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Mobile
+											</label>
+											<input type="text" placeholder="mobile number" class="form-control" name="mobile" ng-model="user.member.mobile">
+										</div>
+										
+										
+										
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="block">
+												Gender
+											</label>
+											<div class="clip-radio radio-primary">
+												<input type="radio" id="us-female" name="gender" value="female" ng-model="user.member.gender">
+												<label for="us-female">
+													Female
+												</label>
+												<input type="radio" id="us-male" name="gender" value="male" ng-model="user.member.gender">
+												<label for="us-male">
+													Male
+												</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Address
+											</label>
+											<input type="text" placeholder="phone number" class="form-control" name="phone" ng-model="user.member.address.street">
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="control-label">
+														Zip Code
+													</label>
+													<input class="form-control" placeholder="enter a zip code" type="text" name="zipcode" ng-model="user.member.address.zipCode">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="form-group">
+													<label class="control-label">
+														City
+													</label>
+													<input class="form-control" placeholder="enter your city" type="text" name="city" ng-model="user.member.address.city">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="control-label">
+														Province
+													</label>
+													<input class="form-control" placeholder="enter a province" type="text" name="zipcode" ng-model="user.member.address.province">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="form-group">
+													<label class="control-label">
+														Country
+													</label>
+													<input class="form-control" placeholder="enter your country" type="text" name="city" ng-model="user.member.address.country">
+												</div>
+											</div>
+											
+										</div>
+										<div class="form-group">
+												<label class="control-label">
+													Job
+												</label>
+												<input type="text" placeholder="your job" class="form-control" name="job" ng-model="user.member.job.headline">
+											</div>
+											<div class="form-group" ng-class="{'has-error':Form.clubName.$dirty && Form.clubName.$invalid, 'has-success':Form.clubName.$dirty && Form.clubName.$valid}">
+												<label class="control-label">
+													Club Name
+												</label>
+												<input type="text" name="clubName" ng-model="user.club" typeahead="state.name for state in getClub($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="" typeahead-on-select="clubSelected($item);" class="form-control"></input>
+											    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+											    <div ng-show="noResults">
+											      <i class="glyphicon glyphicon-remove"></i> No Results Found
+											    </div>
+											</div>
+							
+									</div>
+
+
+									<div class="row">
+										<div class="fileInputBox">Select an image file: <input type="file" id="fileInput"/></div>
+										<div class="col-md-6">
+											<div class="cropBox">
+												<div class="cropArea">
+													<img-crop image="myImage" result-image="myCroppedImage" 
+												            area-type="rectangle">
+												    </img-crop>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="cropBox croppedBox">
+												<div>
+													<img ng-src="{{myCroppedImage}}" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+							<fieldset>
+								<legend>
+									Additional Info
+								</legend>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">
+												Twitter
+											</label>
+											<span class="input-icon">
+												<input class="form-control" type="text" placeholder="Copy and Past your Twitter url" name="twitter" ng-model="user.member.social.twitter">
+												<i class="fa fa-twitter"></i> </span>
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Facebook
+											</label>
+											<span class="input-icon">
+												<input class="form-control" type="text" placeholder="Copy and Past your Facebook url" name="facebook" ng-model="user.member.social.facebook">
+												<i class="fa fa-facebook"></i> </span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">
+												Linkedin
+											</label>
+											<span class="input-icon">
+												<input class="form-control" type="text" placeholder="Copy and Past your Linkedin url" name="linkedin" ng-model="user.member.social.linkedin">
+												<i class="fa fa-linkedin"></i> </span>
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Skype
+											</label>
+											<span class="input-icon">
+												<input class="form-control" type="text" placeholder="Skype contact" name="skype" ng-model="user.member.social.skype">
+												<i class="fa fa-skype"></i> </span>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<div class="row">
+								<div class="col-md-6 text-left">
+									<button class="btn btn-primary" ng-click="saveUser()">Save</button>
+								</div>
+								<div class="col-md-6 text-right" ng-if="isAdmin(userLogged)">
+									<button class="btn btn-danger btn-o" ng-click="removeUser()">Remove
+										<i class="fa fa-trash"></i></button>
+								</div>
+							</div>
+							
+						</form>
+						
+							</div>
+							
+						</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: USER PROFILE -->

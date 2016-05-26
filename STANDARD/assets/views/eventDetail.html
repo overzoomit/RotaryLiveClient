@@ -1,0 +1,86 @@
+<div ng-controller="eventDetailCtrl"><!-- start: PAGE TITLE -->
+<section id="page-title" class="hidden-print">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.pages.INVOICE">{{event.name}}</h1>
+			
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: INVOICE -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="invoice">
+				<div class="row invoice-logo">
+					<div class="col-sm-6">
+						<img class="img-responsive" ng-src="{{getImage(event.imageId, false)}}" >
+					</div>
+					<div class="col-sm-6">
+						<div>
+											
+						<span class="day text-bold">{{moment(event.startDate).format('DD dddd')}}</span>
+						
+						<span class="block month text-large text-light">{{moment(event.startDate).format('MMMM YYYY')}}</span>
+				
+										
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<a ng-show="(moment() < moment(event.endDate)) && event.booked == false" ng-click="bookingEvent(event)" class="btn btn-primary btn-o btn-wide">
+							Booking <i class="fa fa-arrow-circle-right"></i>
+						</a>
+						<a ng-show="(moment() < moment(event.endDate)) && event.booked == true" ng-click="unbook(event)" class="btn btn-danger btn-o btn-wide">
+							Unbook <i class="fa fa-arrow-circle-right"></i>
+						</a>
+						<span  ng-show="(moment() > moment(event.endDate))"> Event no longer avalaible! </span>
+					</div>
+
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-sm-8">
+						
+						<div>
+							<div class="col-md-12 col-xs-12">
+											{{event.text | words:100}}
+											</div>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<table class="table table-condensed">
+							<thead>
+								 <caption>Already booked:</caption>
+								<tr>
+									<th> Pic </th>
+									<th> Name </th>
+									<th> Club </th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody ng-repeat="booked in event.booking">
+								<tr>
+									<td> <img class="img-responsive" ng-src="{{getImage(booked.user.member.photoId, false)}}" > </td>
+									<td> {{booked.user.name}} </td>
+									<td> {{booked.user.club.name}} </td>
+									<td><button ng-show="admin" class="btn btn-danger" ng-click="unbookUser(booked.user)"><i class="glyphicon glyphicon-trash"></i> </button> </td>
+								</tr>
+							</tbody>
+						</table>
+					
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- end: INVOICE -->

@@ -1,0 +1,100 @@
+<!-- start: REGISTRATION -->
+<div class="row">
+	<div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+		<div class="logo">
+			<img ng-src="{{app.layout.logo}}" alt="{{app.name}}" width="200px" height="75px"/>
+		</div>
+		<!-- start: REGISTER BOX -->
+		<div class="box-register" ng-controller="signupCtrl">
+			<form name="Form" class="form-register" novalidate ng-submit="form.submit(Form)">
+				<fieldset>
+					<legend>
+						Sign Up
+					</legend>
+					<div class="form-group" ng-class="{'has-error':Form.fullName.$dirty && Form.fullName.$invalid, 'has-success':Form.fullName.$valid}">
+						<label class="control-label">
+							Full Name <span class="symbol required"></span>
+						</label>
+						<input type="text" placeholder="Enter your Full Name" class="form-control" name="fullName" ng-model="newUser.name" required />
+						<span class="error text-small block" ng-if="Form.fullName.$dirty && Form.fullName.$invalid">Full Name is required</span>
+						<span class="success text-small" ng-if="Form.fullName.$valid">Thank You!</span>
+					</div>
+					<div class="form-group" ng-class="{'has-error':Form.clubName.$dirty && Form.clubName.$invalid, 'has-success':Form.clubName.$dirty && Form.clubName.$valid}">
+						<label class="control-label">
+								Club Name <span class="symbol required"></span>
+						</label>	
+						<input type="text" name="clubName" ng-model="newUser.club" typeahead="state.name for state in getClub($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="
+					    " typeahead-on-select="clubSelected($item);" class="form-control"></input>
+
+					    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+					    <div ng-show="noResults">
+					      <i class="glyphicon glyphicon-remove"></i> No Results Found
+					    </div>
+
+					    <span class="error text-small block" ng-if="Form.clubName.$dirty && Form.clubName.$error.used">You have to choose a Club Name!</span>
+						<span class="success text-small" ng-if="Form.clubName.$dirty && Form.clubName.$valid">Wonderful!</span>
+					</div>
+					
+					<p>
+						Enter your account details below:
+					</p>
+					<div class="form-group" ng-class="{'has-error':Form.username.$dirty && Form.username.$invalid, 'has-success':Form.username.$valid}">
+						<label class="control-label">
+							Username <span class="symbol required"></span>
+						</label>
+						<span class="input-icon">
+							<input type="text" placeholder="Enter a username or email" class="form-control" name="username" ng-model="newUser.username" required />
+							<i class="fa fa-envelope"></i>
+						</span>
+						<span class="error text-small block" ng-if="Form.username.$dirty && Form.username.$error.required">Username is required</span>
+						<span class="error text-small block" ng-if="Form.username.$dirty && Form.username.$error.used">This username is already taken!</span>
+						<span class="success text-small" ng-if="Form.username.$valid">Great!</span>
+					</div>
+
+					<div class="form-group" ng-class="{'has-error':Form.password.$dirty && Form.password.$invalid, 'has-success':Form.password.$valid}">
+						<label class="control-label">
+							Password <span class="symbol required"></span>
+						</label>
+						<span class="input-icon">
+							<input type="password" placeholder="Enter a Password" class="form-control" name="password" ng-model="newUser.password" ng-minlength="5" required/>
+							<i class="fa fa-lock"></i>
+						</span>
+						<span class="error text-small block" ng-if="Form.password.$dirty && Form.password.$error.minlength">Too short!</span>
+						<span class="success text-small block" ng-if="Form.password.$valid">Ok!</span>
+					</div>
+					<div class="form-group" ng-class="{'has-error':Form.password2.$dirty && Form.password2.$error.compareTo || Form.password2.$dirty && Form.password2.$invalid, 'has-success':Form.password2.$valid}">
+						<label class="control-label">
+							Repeat Password <span class="symbol required"></span>
+						</label>
+						<span class="input-icon">
+							<input type="password" placeholder="Repeat Password" class="form-control" name="password2" ng-model="passwd" compare-to="newUser.password" required/>
+							<i class="fa fa-lock"></i>
+						</span>
+						<span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.required">Repeat password is required!</span>
+						<span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.compareTo">Passwords do not match!</span>
+						<span class="success text-small block" ng-if="Form.password2.$valid">Passwords match!</span>
+					</div>
+
+					<div class="form-actions">
+						<p>
+							Already have an account?
+							<a ui-sref="login.signin">
+								Log-in
+							</a>
+						</p>
+						<button type="submit" class="btn btn-primary pull-right">
+							Submit <i class="fa fa-arrow-circle-right"></i>
+						</button>
+					</div>
+				</fieldset>
+			</form>
+			<!-- start: COPYRIGHT -->
+			<div class="copyright">
+				{{app.year}} &copy; {{ app.name }} by {{ app.author }}.
+			</div>
+			<!-- end: COPYRIGHT -->
+		</div>
+		<!-- end: REGISTER BOX -->
+	</div>
+</div>
+<!-- end: REGISTRATION -->

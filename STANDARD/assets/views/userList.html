@@ -1,0 +1,67 @@
+<!-- start: TABLE WITH SORTING -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- /// controller:  'UserCtrl' -  localtion: assets/js/controllers/userCtrl.js /// -->
+			<div ng-controller="UserCtrl" >
+				<div class="row margin-bottom-10">
+
+				</div>
+
+<!-- start: PANEL TOOLS -->
+<div class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-8">
+			
+					
+<!-- start: SEARCH FORM -->
+<div class="search-form">
+	<a class="s-open" >
+		<i class="ti-search"></i>
+	</a>
+	<form class="navbar-form" role="search">
+		<a class="s-remove" ng-toggle-class="search-open" target=".navbar-form">
+			<i class="ti-close"></i>
+		</a>
+		<div class="form-group">
+			<input ng-model="search" type="text" class="form-control" placeholder="Search...">
+			<button class="btn search-button" type="submit" ng-click="tableParams.filter(search);">
+				<i class="ti-search"></i>
+			</button>
+		</div>
+	</form>
+</div>
+<!-- end: SEARCH FORM -->
+
+					
+			
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-wide btn-primary pull-right" ui-sref="app.auth.user.new"><i class="fa fa-plus"></i> Add Member</a>
+		</div>
+	</div>
+
+</div>
+<!-- end: PANEL TOOLS -->
+
+				<table ng-table="tableParams" show-filter="false" class="table table-striped">
+					<span class="badge badge-inverse">#{{tableParams.total()}}</span>
+					
+					<tr ng-repeat="user in $data">
+						<td data-title="'Username'" ng-click="shareObj(user)"><a>{{user.username}}</a></td>
+						<td data-title="'Name'" filter="{ 'ragioneSociale': 'text' }" ng-click="shareObj(user)"><a>{{user.name | words:4 :true}}</a></td>
+						<td data-title="'Club Name'"  filter="{ 'referente': 'text' }">{{user.club.name}}</td>
+						<td data-title="'Creation Date'" 	filter="{ 'creationDate': 'text' }">{{user.creationDate | date}}</td>
+						<td data-title="'Verified'" 	filter="{ 'verified': 'text' }">
+							<span ng-if="user.verified"><i tooltip-placement="top" uib-tooltip="Valid" class="fa fa-check-circle checkdispoimp"></i></span>
+							<span ng-if="!user.verified"><i tooltip-placement="top" uib-tooltip="Invalid User" class="fa fa-circle-o checkdispoimp"></i></span>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: TABLE WITH SORTING -->
+</div>

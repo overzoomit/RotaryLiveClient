@@ -1,0 +1,68 @@
+<!-- start: TIMELINE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="eventCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<div ng-if="noEvents" class="alert alert-info">
+					<h3 class="center"> <strong>No events available</strong>, please check later <h3>
+					</div>
+			<div id="timeline">
+				<div class="timeline">
+					<div class="spine"></div>
+					
+					<div ng-repeat="(key, value) in events | groupBy: 'startDateMonth'">
+						<div class="date_separator" id="november">
+							<span>{{ key |uppercase}}</span>
+						</div>
+						<ul class="columns">
+							<li ng-repeat="event in value">
+								<div class="timeline_element partition-white">
+									<div class="timeline_date">
+										<div>
+
+											<div class="inline-block">
+												<span class="day text-bold">{{moment(event.startDate).format('DD')}}</span>
+											</div>
+											<div class="inline-block">
+												<span class="block week-day text-extra-large">{{moment(event.startDate).format('dddd')}}</span>
+												<span class="block month text-large text-light">{{moment(event.startDate).format('MMMM YYYY')}}</span>
+											</div>
+										</div>
+									</div>
+									<div class="timeline_title">
+										<i class="fa fa-check fa-2x pull-left fa-border"></i>
+										<h4 class="light-text no-margin padding-5" ng-click="goDetail(event)">{{event.name | uppercase}}</h4>
+									</div>
+
+									<div class="timeline_content" ng-if="event.imageId">
+										<div class="row">
+											<div class="col-md-4 col-xs-5">
+												<img class="img-responsive" ng-src="{{getImage(event.imageId, false)}}" >
+											</div>
+											<div class="col-md-8 col-xs-7">
+												{{event.text | words:100}}
+											</div>
+										</div>
+									</div>
+									<div class="timeline_content" ng-if="!event.imageId">
+										{{event.text | words:150}}
+									</div>
+
+									<div class="readmore">
+										<a ng-show="(event.booked == false)" ng-click="bookingEvent(event)" class="btn btn-primary btn-o btn-wide">
+											Booking <i class="fa fa-arrow-circle-right"></i>
+										</a>
+										<a ng-show="(event.booked == true)" ng-click="unbook(event)" class="btn btn-danger btn-o btn-wide">
+											Unbook <i class="fa fa-arrow-circle-right"></i>
+										</a>
+
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- start: TIMELINE -->

@@ -1,0 +1,158 @@
+<!-- start: CALENDAR -->
+<div class="container-fluid container-fullw bg-white" ng-controller="CalendarCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- /// controller:  'CalendarCtrl' -  localtion: assets/js/controllers/calendarCtrl.js /// -->
+			<div ng-controller="CalendarCtrl" id="demo">
+				<div class="row" ng-if="isAdmin(userLogged)">
+					<div class="col-md-12">
+						<div class="margin-bottom-30">
+							<button class="btn btn-primary btn-o btn-wide" ui-sref="app.auth.event.new">
+								<i class="ti-plus"></i> Add new event
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="text-center margin-bottom-20 margin-top-20">{{ calendarTitle }} </h2>
+					</div>
+					<div class="col-xs-8">
+						<div class="btn-group">
+							<button class="btn btn-primary" mwl-date-modifier date="calendarDay" decrement="calendarView">
+								<i class="ti-angle-left"></i>
+							</button>
+							<button class="btn btn-primary" mwl-date-modifier date="calendarDay" increment="calendarView">
+								<i class="ti-angle-right"></i>
+							</button>
+						</div>
+						<button class="btn btn-primary btn-o" mwl-date-modifier date="calendarDay" set-to-today>
+							Today
+						</button>
+					</div>
+					<div class="col-xs-4 text-right">
+						<div class="visible-md visible-lg hidden-sm hidden-xs">
+							<div class="btn-group">
+								<label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'year'">
+									Year
+								</label>
+								<label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'month'">
+									Month
+								</label>
+								<label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'week'">
+									Week
+								</label>
+								<label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'day'">
+									Day
+								</label>
+							</div>
+						</div>
+						<div class="visible-xs visible-sm hidden-md hidden-lg">
+							<div class="btn-group" uib-dropdown>
+								<button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle>
+									<i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-right dropdown-light" role="menu">
+									<li>
+										<a ng-model="calendarView" uib-btn-radio="'year'" href="">
+											Year
+										</a>
+									</li>
+									<li>
+										<a ng-model="calendarView" uib-btn-radio="'month'" href="">
+											Month
+										</a>
+									</li>
+									<li>
+										<a ng-model="calendarView" uib-btn-radio="'week'" href="">
+											Week
+										</a>
+									</li>
+									<li>
+										<a ng-model="calendarView" uib-btn-radio="'day'" href="">
+											Day
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<mwl-calendar
+				events="events"
+				view="calendarView"
+				view-title="calendarTitle"
+				current-day="calendarDay"
+				on-event-click="eventClicked(calendarEvent)"
+				edit-event-html="'<div  class=\'btn btn-primary btn-sm pull-right\'><i class=\'ti-eye\'></i></div>'"
+				on-edit-event-click="goDetail(calendarEvent)"
+				on-delete-event-click="bookingEvent(calendarEvent)"
+				auto-open="false"
+				></mwl-calendar>
+				<br>
+				<br>
+				<br>
+				<!-- start: EDIT EVENT TEMPLATE -->
+				<script type="text/ng-template" id="calendarEvent.html">
+					<div class="modal-body">
+						<div class="form-group">
+							<label>
+							Event title:
+							</label>
+							<div>
+								{{event.title}}
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<label>
+							
+							</label>
+							<div>
+								{{event.text}}
+							</div>
+						</div>
+						<div class="form-group" ng-if="event.imageId">
+							<img class="img-responsive" ng-src="{{getImage(event.imageId, true)}}" >
+						</div>
+						<div class="row">
+							
+							<div class="form-group col-md-6 col-sm-6 col-xs-6">
+								<label>
+								Start
+								</label>
+								<div>
+								{{event.startsAt | date : 'd MMM yy @HH:mm'}}
+								</div>
+							</div>
+							<div class="form-group col-md-6 col-sm-6 col-xs-6">
+								<label>
+								End
+								</label>
+								<div>
+								{{event.endsAt | date : 'd MMM yy @HH:mm'}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+					<button ng-show="(event.today < event.endsAt) && event.booked == false" class="btn btn-primary" ng-click="deleteEvent(event)">
+					Booking
+					</button>
+					<button ng-show="(event.today < event.endsAt) && event.booked == true" class="btn btn-primary" ng-click="Unbook(event)">
+					Unbook
+					</button>
+					<span  ng-show="(event.today > event.endsAt)"> Event no longer avalaible! </span>
+					
+					<button class="btn btn-primary btn-o" ng-click="cancel()">
+					Annulla
+					</button>
+					</div>
+				</script>
+				<!-- end: EDIT EVENT TEMPLATE -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: CALENDAR -->

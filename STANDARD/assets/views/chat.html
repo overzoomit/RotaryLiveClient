@@ -1,0 +1,16 @@
+<div ng-controller="ChatCtrl">
+				<div class="panel panel-white no-radius">
+					<div class="panel-heading border-bottom">
+						<h4 class="panel-title">Chat whit {{user.member.firstName}} {{user.member.lastName}}</h4>
+					</div>
+					<div class="panel-body no-padding">
+						<div class="panel-scroll height-330" id="chatBox" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+							<clip-chat messages="chat" id-self="selfIdUser" id-other="otherIdUser"></clip-chat>
+
+						</div>
+					</div>
+					<chat-submit submit-function="sendMessage" ng-model="chatMessage" scroll-element="#chatBox"></chat-submit>
+				</div>
+				
+</div>
+		

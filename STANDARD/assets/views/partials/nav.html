@@ -1,0 +1,104 @@
+
+<!-- start: MAIN NAVIGATION MENU -->
+<div class="navbar-title">
+	<span>Entity</span>
+</div>
+<ul class="main-navigation-menu">
+	<li ui-sref-active="active" ng-if="isAdmin(userLogged)">
+		<a ui-sref="app.auth.user.list">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Member </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active" ng-if="!isAdmin(userLogged)">
+		<a ui-sref="app.auth.user.listme">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Member </span>
+				</div>
+			</div>
+		</a>
+	</li>
+
+	<li ui-sref-active="active" ng-if="isAdmin(userLogged)">
+		<a ui-sref="app.auth.club.list">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-tag"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Club Name </span>
+				</div>
+			</div>
+		</a>
+	</li>
+</ul>
+<!-- end: MAIN NAVIGATION MENU -->
+<!-- start: CORE FEATURES -->
+<div class="navbar-title">
+	<span>Features</span>
+</div>
+<ul class="folders">
+	<li>
+		<a ui-sref="app.auth.event.calendar">
+			<div class="item-content">
+				<div class="item-media">
+					<span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-calendar fa-stack-1x fa-inverse"></i> </span>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Events </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li>
+		<a ui-sref="app.auth.event.timeline">
+			<div class="item-content">
+				<div class="item-media">
+					<span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i> </span>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Timeline Events </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<!-- <li>
+		<a ui-sref="app.pages.messages">
+			<div class="item-content">
+				<div class="item-media">
+					<span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-folder-open-o fa-stack-1x fa-inverse"></i> </span>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Messages </span>
+				</div>
+			</div>
+		</a>
+	</li> -->
+
+</ul>
+
+<div ng-hide="fullFill" class="alert alert-warning" ng-click="filled()">
+	<h1  class="center"><i class="glyphicon glyphicon-exclamation-sign"></i></h1>
+	<div class="center">
+	<span>Complete your user profile!</span>
+</div>
+<div class="center">
+	<span>e-mail, mobile and job </span>
+
+</div>
+	
+</div>
+
+
+
+<!-- end: CORE FEATURES -->

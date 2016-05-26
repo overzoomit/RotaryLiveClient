@@ -1,0 +1,65 @@
+<!-- start: TABLE WITH SORTING -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- /// controller:  'ClubCtrl' -  localtion: assets/js/controllers/clubCtrl.js /// -->
+			<div ng-controller="ClubCtrl" >
+				<div class="row margin-bottom-10">
+
+				</div>
+
+<!-- start: PANEL TOOLS -->
+<div class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-8">
+			
+					
+<!-- start: SEARCH FORM -->
+<div class="search-form">
+	<a class="s-open" >
+		<i class="ti-search"></i>
+	</a>
+	<form class="navbar-form" role="search">
+		<a class="s-remove" ng-toggle-class="search-open" target=".navbar-form">
+			<i class="ti-close"></i>
+		</a>
+		<div class="form-group">
+			<input ng-model="search" type="text" class="form-control" placeholder="Search...">
+			<button class="btn search-button" type="submit" ng-click="tableParams.filter(search);">
+				<i class="ti-search"></i>
+			</button>
+		</div>
+	</form>
+</div>
+<!-- end: SEARCH FORM -->
+
+					
+			
+	</div>
+		<div class="col-md-4">
+			<a class="btn btn-wide btn-primary pull-right" ui-sref="app.auth.club.new"><i class="fa fa-plus"></i> Add Club</a>
+		</div>
+	</div>
+
+
+	
+</div>
+<!-- end: PANEL TOOLS -->
+
+				<table ng-table="tableParams" show-filter="false" class="table table-striped">
+					<span class="badge badge-inverse">#{{tableParams.total()}}</span>
+					
+					<tr ng-repeat="user in $data">
+						<td data-title="'Club Name'" sortable="'name'" ng-click="shareObj(user)"><a>{{user.name}}</a></td>
+						<td data-title="'Email'" 	sortable="'email'"	 filter="{ 'referente': 'text' }">{{user.email}}</td>
+						<td data-title="'Website'" >{{user.website}}</td>
+						
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: TABLE WITH SORTING -->
+</div>
