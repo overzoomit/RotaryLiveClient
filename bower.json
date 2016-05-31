@@ -101,7 +101,7 @@
     "angular-hateoas": "^0.2.5"
   },
   "resolutions": {
-    "angular": "1.4.10",
+    "angular": "~1.4.7",
     "moment": "~2.8.3",
     "select2": "~4.0.0",
     "perfect-scrollbar": "0.6.10"
