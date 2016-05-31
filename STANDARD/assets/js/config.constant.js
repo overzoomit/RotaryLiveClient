@@ -3,7 +3,7 @@
 /**
  * Config constant
  */
-  app.constant('REST_PATH','http://46.252.145.11:8383');
+  app.constant('REST_PATH','http://185.31.65.31:8383');
  // app.constant('REST_PATH','http://192.168.1.77:8383');
 
 app.constant('APP_MEDIAQUERY', {
